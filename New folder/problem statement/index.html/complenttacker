@@ -1,0 +1,44 @@
+'use client'
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+
+const data = [
+  { date: '2023-01', complaints: 10 },
+  { date: '2023-02', complaints: 15 },
+  { date: '2023-03', complaints: 8 },
+  { date: '2023-04', complaints: 12 },
+  { date: '2023-05', complaints: 20 },
+]
+
+export default function ComplaintTracker() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Complaint Tracker</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={{
+            complaints: {
+              label: "Complaints",
+              color: "hsl(var(--chart-2))",
+            },
+          }}
+          className="h-[300px]"
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data}>
+              <XAxis dataKey="date" />
+              <YAxis />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Line type="monotone" dataKey="complaints" stroke="var(--color-complaints)" />
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}
+
